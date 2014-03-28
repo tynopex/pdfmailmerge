@@ -20,8 +20,12 @@ def mailmerge( ifile, ofile, fn_updatetmpl, content_list ):
 
         # Generate page for each content element
         for cdata in content_list:
-            d = { '/Length' : len(cdata), '__streamdata__' : cdata }
-            c = StreamObject.initializeFromDictionary( d )
+
+            if isinstance( cdata, StreamObject ):
+                c = cdata
+            else:
+                d = { '/Length' : len(cdata), '__streamdata__' : cdata }
+                c = StreamObject.initializeFromDictionary( d )
 
             p = DictionaryObject( pg.items() )
             p[NameObject('/Contents')] = ArrayObject( [tmpl,c] )
