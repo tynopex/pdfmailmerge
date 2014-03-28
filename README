@@ -1,0 +1,9 @@
+PdfMailMerge
+============
+
+This library leverages the PyPDF2 library to allow a user to generate
+multi-page PDF documents uses a template page and a sequence of incremental
+updates.
+
+This takes advantage of PDF indirect objects so that the template is only
+stored once, greatly reducing filesize.
