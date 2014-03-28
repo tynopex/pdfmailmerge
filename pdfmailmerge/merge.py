@@ -25,6 +25,7 @@ def mailmerge( ifile, ofile, fn_updatetmpl, content_list ):
 
             p = DictionaryObject( pg.items() )
             p[NameObject('/Contents')] = ArrayObject( [tmpl,c] )
+            p[NameObject('/Resources')] = res
             out.addPage( p )
 
         # Write complete output file
