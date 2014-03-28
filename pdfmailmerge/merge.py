@@ -59,4 +59,23 @@ def test_pageno():
         if NameObject('/Text') not in res[NameObject('/ProcSet')]:
             res[NameObject("/ProcSet")].append( NameObject("/Text") )
 
-    mailmerge( "sample.pdf", "out.pdf", update_pg, content )
+    mailmerge( "sample.pdf", "out_pageno.pdf", update_pg, content )
+
+
+def test_mergepdf():
+    from glob import glob
+
+    # Get input files
+    files = sorted(glob("pages/*.pdf"))
+
+    # FIXME: Merge resource dictionaries
+    # FIXME: Check MediaBox, etc
+
+    # Extract contents from overlay files
+    def getContent( fname ):
+        with open( fname, "rb" ) as f:
+            return PdfFileReader(f).getPage(0).getContents()
+
+    content = [getContent(fname) for fname in files]
+
+    mailmerge( "sample.pdf", "out_mergepdf.pdf", None, content )
